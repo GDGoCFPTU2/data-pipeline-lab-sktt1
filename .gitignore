@@ -2,3 +2,4 @@
 .env
 .direnv/
 *egg-*
+__pycache__
