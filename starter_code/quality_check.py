@@ -3,13 +3,24 @@
 # ==========================================
 
 def run_semantic_checks(doc_dict: dict) -> bool:
+    """Kiểm tra chất lượng dữ liệu trước khi đưa vào Knowledge Base.
+
+    Args:
+        doc_dict: Dictionary chứa thông tin document, cần có key "content".
+
+    Returns:
+        True nếu dữ liệu đạt chất lượng, False nếu không đạt.
+    """
     content = doc_dict.get("content", "")
-    
+
     # 1. Kiểm tra độ dài: Nếu content trống hoặc < 10 ký tự -> False
-    # TODO: Thực hiện kiểm tra độ dài ở đây
-    
+    if not content or len(content) < 10:
+        return False
+
     # 2. Kiểm tra từ khóa lỗi
     toxic_keywords = ["Null pointer exception", "OCR Error", "Traceback"]
-    # TODO: Lặp qua các từ trong toxic_keywords, nếu từ đó xuất hiện trong content -> Trả về False
-            
+    for keyword in toxic_keywords:
+        if keyword in content:
+            return False
+
     return True
